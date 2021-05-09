@@ -1,7 +1,6 @@
 package micwad.movieService.service;
 
 import micwad.movieService.model.Movie;
-import micwad.movieService.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,11 +8,11 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    private MovieRepository movieRepository;
-
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
+//    private MovieRepository movieRepository;
+//
+//    public MovieService(MovieRepository movieRepository) {
+//        this.movieRepository = movieRepository;
+//    }
 
     public List<Movie> findAll() {
         return List.of(new Movie(1L, "filmJakis", "horror"), new Movie(2L, "filmJakis2", "komedia"));

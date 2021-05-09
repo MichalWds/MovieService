@@ -3,10 +3,7 @@ package micwad.movieService.controller;
 import micwad.movieService.model.Movie;
 import micwad.movieService.service.MovieService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,12 +23,24 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> findById(@PathVariable long id) {
-        if (movieService.findById().getId() == id) {
+    public ResponseEntity<Movie> findById(@PathVariable Long id) {
+        if (movieService.findById().getId().equals(id)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping
+    public ResponseEntity<Movie> postMovie (@RequestBody Movie movie) {
+        return ResponseEntity.ok(movie);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie (@RequestBody Movie movie, @PathVariable Long id) {
+        return ResponseEntity.ok(movie);
+    }
+
+    
 
 }
