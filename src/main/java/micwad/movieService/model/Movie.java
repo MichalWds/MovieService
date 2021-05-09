@@ -4,12 +4,12 @@ public class Movie {
 
     private Long id;
     private String name;
-    private String category;
+    private Category category;
 
     public Movie() {
     }
 
-    public Movie(long id, String name, String category) {
+    public Movie(long id, String name, Category category) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -31,11 +31,11 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

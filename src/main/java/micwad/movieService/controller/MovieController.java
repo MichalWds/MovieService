@@ -33,12 +33,12 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<Movie> postMovie(@RequestBody Movie movie) {
-        return ResponseEntity.ok(movie);
+        return ResponseEntity.ok(movieService.create(movie));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable Long id) {
-        return ResponseEntity.ok(movie);
+        return ResponseEntity.ok(movieService.update(movie));
     }
 
     @DeleteMapping("/{id}")
