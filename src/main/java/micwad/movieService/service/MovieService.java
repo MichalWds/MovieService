@@ -1,37 +1,51 @@
 package micwad.movieService.service;
 
 import micwad.movieService.model.Movie;
+import micwad.movieService.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static micwad.movieService.model.Category.*;
+import java.util.Optional;
 
 @Service
 public class MovieService {
 
-//    private MovieRepository movieRepository;
-//
-//    public MovieService(MovieRepository movieRepository) {
-//        this.movieRepository = movieRepository;
-//    }
+    private final MovieRepository movieRepository;
 
-    public List<Movie> findAll() {
-        return List.of(new Movie(1L, "filmJakis", HORROR), new Movie(2L, "filmJakis2", HORROR));
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
-    public Movie findById() {
-        return new Movie(1L, "filmJakis", COMEDY);
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
+    }
+
+    public Optional<Movie> findById(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        if (movie.isPresent()) {
+            return movie;
+        } else {
+            throw new RuntimeException();
+        }
     }
 
     public Movie update(Movie movie) {
-        return movie;
+        if (movie.getId() > 0) {
+            return movieRepository.save(movie);
+        } else {
+            throw new RuntimeException();
+        }
     }
 
     public Movie create(Movie movie) {
-        return movie;
+        return movieRepository.save(movie);
     }
 
-    public void deleteMovie(Long id){
+    public void deleteMovie(Long id) {
+        if (movieRepository.findById(id).isPresent()) {
+            movieRepository.deleteById(id);
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
