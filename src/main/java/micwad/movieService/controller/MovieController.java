@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -23,12 +24,8 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> findById(@PathVariable Long id) {
-        if (movieService.findById().getId().equals(id)) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Optional<Movie>> findById(@PathVariable Long id) {
+            return ResponseEntity.ok(movieService.findById(id));
     }
 
     @PostMapping

@@ -1,9 +1,16 @@
 package micwad.movieService.model;
 
+import javax.persistence.*;
+
+@Entity(name = "movies")
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Enumerated(EnumType.STRING) //hibernate is trying to save it as an int if we do not add this annotation
     private Category category;
 
     public Movie() {
