@@ -6,13 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
@@ -24,7 +23,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Movie>> findById(@PathVariable Long id) {
+    public ResponseEntity<Movie> findById(@PathVariable Long id) {
             return ResponseEntity.ok(movieService.findById(id));
     }
 
@@ -42,5 +41,10 @@ public class MovieController {
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/true")
+    public ResponseEntity<Movie> changeFlag(@PathVariable Long id) {
+        return ResponseEntity.ok(movieService.changeFlag(id));
     }
 }
