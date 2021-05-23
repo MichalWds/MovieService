@@ -10,16 +10,19 @@ public class Movie {
     private Long id;
     private String name;
 
+    private boolean isAvailable;
+
     @Enumerated(EnumType.STRING) //hibernate is trying to save it as an int if we do not add this annotation
     private Category category;
 
     public Movie() {
     }
 
-    public Movie(long id, String name, Category category) {
+    public Movie(long id, String name, Category category, boolean available) {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.isAvailable = available;
     }
 
     public Long getId() {
@@ -44,5 +47,13 @@ public class Movie {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }

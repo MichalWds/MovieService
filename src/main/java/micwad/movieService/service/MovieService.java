@@ -20,10 +20,10 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Optional<Movie> findById(Long id) {
+    public Movie findById(Long id) {
         Optional<Movie> movie = movieRepository.findById(id);
         if (movie.isPresent()) {
-            return movie;
+            return movieRepository.findById(id).get();
         } else {
             throw new RuntimeException();
         }
@@ -44,6 +44,16 @@ public class MovieService {
     public void deleteMovie(Long id) {
         if (movieRepository.findById(id).isPresent()) {
             movieRepository.deleteById(id);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    public Movie changeFlag(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        if (movie.isPresent()) {
+            movie.get().setAvailable(true);
+            return movieRepository.save(movie.get());
         } else {
             throw new RuntimeException();
         }
