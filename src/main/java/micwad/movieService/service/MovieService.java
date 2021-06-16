@@ -58,4 +58,14 @@ public class MovieService {
             throw new RuntimeException();
         }
     }
+
+    public Movie changeFlagFalse(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        if (movie.isPresent()) {
+            movie.get().setAvailable(false);
+            return movieRepository.save(movie.get());
+        } else {
+            throw new RuntimeException();
+        }
+    }
 }

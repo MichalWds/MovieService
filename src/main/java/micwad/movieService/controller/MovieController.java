@@ -47,4 +47,9 @@ public class MovieController {
     public ResponseEntity<Movie> changeFlag(@PathVariable Long id) {
         return ResponseEntity.ok(movieService.changeFlag(id));
     }
+
+    @PutMapping("/{id}/false")
+    public ResponseEntity<Movie> changeFlagFalse(@PathVariable Long id) {
+        return ResponseEntity.ok(movieService.changeFlagFalse(id));
+    }
 }
