@@ -2,6 +2,7 @@ package micwad.movieService.controller;
 
 import micwad.movieService.model.Movie;
 import micwad.movieService.service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +18,38 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<Movie>> findAll() {
+//        return ResponseEntity.ok(movieService.findAll());
+//    }
+
     @GetMapping
-    public ResponseEntity<List<Movie>> findAll() {
-        return ResponseEntity.ok(movieService.findAll());
+    public ResponseEntity<List<Movie>> findAllException() {
+        /**
+        404 HTTP STATUS
+         */
+ //       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        /**
+        400 HTTP STATUS
+         */
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        /**
+            500 HTTP STATUS
+         */
+
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        /**
+            504 HTTP STATUS connect exception
+         */
+
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Movie> findById(@PathVariable Long id) {
-            return ResponseEntity.ok(movieService.findById(id));
+        return ResponseEntity.ok(movieService.findById(id));
     }
 
     @PostMapping
